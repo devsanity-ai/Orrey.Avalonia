@@ -47,7 +47,7 @@ public sealed class GraphEdgeLayer : Control
     public double Curvature { get; set; } = 0.14;
 
     /// <summary>Gap left between a node's boundary and the end of its edges.</summary>
-    public double NodeMargin { get; set; } = 6;
+    public double NodeMargin { get; set; } = 2;
 
     /// <summary>Opacity of the edge that currently has focus.</summary>
     public double FocusedOpacity { get; set; } = 0.85;

@@ -342,6 +342,16 @@ public class GraphView : Panel
     }
 
     /// <summary>
+    /// Optional radius, in unscaled pixels, that edges should meet for a given node.
+    /// </summary>
+    /// <remarks>
+    /// Return null to trim to the node's arranged bounds. Supply a value when the template surrounds its
+    /// visible shape with chrome — a caption or buttons stacked under a circle inflate the arranged box, and
+    /// edges then stop noticeably short of the shape they appear to connect.
+    /// </remarks>
+    public Func<GraphNode, double?>? NodeAnchorRadius { get; set; }
+
+    /// <summary>
     /// Rebuilds node visuals and forces from the current <see cref="Graph"/>, then reheats.
     /// Call this after adding or removing nodes or links.
     /// </summary>
@@ -504,7 +514,8 @@ public class GraphView : Panel
             presenter.ZIndex = ReferenceEquals(node, FocusedNode) ? 100 : 1;
 
             _visuals[node] = new GraphNodeVisual(
-                node, center, size.Width / 2 * zoom, size.Height / 2 * zoom);
+                node, center, size.Width / 2 * zoom, size.Height / 2 * zoom,
+                NodeAnchorRadius?.Invoke(node) is { } radius ? radius * zoom : null);
         }
 
         ApplyEdgeAppearance();

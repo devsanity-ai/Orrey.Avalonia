@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Orrery/Orrery.csproj" />
+    <Project Path="src/Orrery.Avalonia/Orrery.Avalonia.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Orrery.Tests/Orrery.Tests.csproj" />
+  </Folder>
+  <Folder Name="/samples/">
+    <Project Path="samples/OrrerySample/OrrerySample.csproj" />
+  </Folder>
+</Solution>

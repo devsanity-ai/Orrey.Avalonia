@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Orrery.Avalonia</RootNamespace>
+    <PackageId>Orrery.Avalonia</PackageId>
+    <Description>An interactive force-directed graph control for Avalonia. Templated node content, curved labelled edges with arrowheads, node dragging, pan and zoom, and hover focus with multi-hop de-emphasis. Physics by Orrery (a C# port of d3-force).</Description>
+    <PackageTags>avalonia;graph;network;force-directed;control;visualization</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="12.*" />
+    <ProjectReference Include="../Orrery/Orrery.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="\" />
+    <None Include="../../THIRD-PARTY-NOTICES.txt" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>

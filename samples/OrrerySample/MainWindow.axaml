@@ -1,0 +1,43 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:orrery="using:Orrery.Avalonia"
+        xmlns:sample="using:OrrerySample"
+        x:Class="OrrerySample.MainWindow"
+        Title="Orrery — force-directed graph sample"
+        Width="1000" Height="700"
+        Background="#12161D">
+
+  <Grid RowDefinitions="Auto,*">
+    <TextBlock Grid.Row="0" Margin="16,14,16,6" Foreground="#8B95A5" FontSize="12"
+               Text="Drag a node to move it · drag the background to pan · wheel to zoom · hover to focus its neighbourhood" />
+
+    <!-- Node visuals come from these templates, matched on the type of GraphNode.Data. Anything Avalonia
+         can render works here, including interactive content. -->
+    <orrery:GraphView Grid.Row="1" x:Name="GraphHost"
+                      LinkDistance="150" ChargeStrength="-1400" FitPadding="60"
+                      EdgeBrush="#5C7CFA" EdgeLabelBrush="#8B95A5" EdgeLabelBackground="#1B2230">
+      <orrery:GraphView.DataTemplates>
+
+        <DataTemplate DataType="sample:Person">
+          <Border Background="#1E2635" BorderBrush="#5C7CFA" BorderThickness="1.5"
+                  CornerRadius="20" Padding="14,8">
+            <StackPanel>
+              <TextBlock Text="{Binding Name}" Foreground="#E6EAF2" FontSize="13" FontWeight="SemiBold" />
+              <TextBlock Text="{Binding Role}" Foreground="#8B95A5" FontSize="10" />
+            </StackPanel>
+          </Border>
+        </DataTemplate>
+
+        <DataTemplate DataType="sample:Team">
+          <Border Width="96" Height="96" CornerRadius="48"
+                  Background="#243049" BorderBrush="#5C7CFA" BorderThickness="2">
+            <TextBlock Text="{Binding Name}" Foreground="#9FB4FF" FontSize="14" FontWeight="Bold"
+                       TextAlignment="Center" TextWrapping="Wrap"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+          </Border>
+        </DataTemplate>
+
+      </orrery:GraphView.DataTemplates>
+    </orrery:GraphView>
+  </Grid>
+</Window>

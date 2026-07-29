@@ -1,0 +1,23 @@
+<Project>
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <!-- Package metadata shared by both shipping packages. -->
+  <PropertyGroup Condition="'$(IsPackable)' != 'false'">
+    <Version>1.0.0</Version>
+    <Authors>Orrery Contributors</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/sargemonkey/Orrery</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/sargemonkey/Orrery</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageTags>graph;network;force-directed;layout;visualization;d3-force</PackageTags>
+  </PropertyGroup>
+
+</Project>

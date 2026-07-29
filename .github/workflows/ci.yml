@@ -1,0 +1,45 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+
+      - name: Restore
+        run: dotnet restore Orrery.slnx
+
+      - name: Build
+        run: dotnet build Orrery.slnx -c Release --no-restore
+
+      # The simulation has no UI dependency, so the physics tests run headless on every OS.
+      - name: Test
+        run: dotnet test tests/Orrery.Tests/Orrery.Tests.csproj -c Release --no-build
+
+      # Packs every packable project in the solution; tests and samples opt out via IsPackable.
+      - name: Pack
+        if: matrix.os == 'ubuntu-latest'
+        run: dotnet pack Orrery.slnx -c Release -o artifacts --no-build
+
+      - uses: actions/upload-artifact@v4
+        if: matrix.os == 'ubuntu-latest'
+        with:
+          name: packages
+          path: artifacts/*.nupkg

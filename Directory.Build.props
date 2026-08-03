@@ -9,7 +9,7 @@
 
   <!-- Package metadata shared by both shipping packages. -->
   <PropertyGroup Condition="'$(IsPackable)' != 'false'">
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>Orrery Contributors</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>

@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="../../src/Orrery/Orrery.csproj" />
+    <ProjectReference Include="../../src/Orrery.Avalonia/Orrery.Avalonia.csproj" />
   </ItemGroup>
 
 </Project>

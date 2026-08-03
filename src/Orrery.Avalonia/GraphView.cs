@@ -130,6 +130,30 @@ public class GraphView : Panel
     private bool _isPanning;
     private bool _userAdjustedView;
 
+    /// <summary>
+    /// Makes the empty canvas hit-testable.
+    /// </summary>
+    /// <remarks>
+    /// An Avalonia <see cref="Panel"/> with a null Background does not participate in hit testing, so a
+    /// press on bare canvas passes straight THROUGH the view and <see cref="OnPointerPressed"/> never runs.
+    /// This control advertises background-drag panning (<see cref="IsPanEnabled"/>, on by default), so
+    /// leaving the background null made that feature silently dead for every host that didn't happen to
+    /// set one — including this repo's own sample, whose caption promised it.
+    /// <para>
+    /// It is an OverrideDefaultValue rather than an assignment in the instance constructor so a host that
+    /// wants a real background (or explicitly wants none) still wins; assigning would clobber XAML.
+    /// </para>
+    /// <para>
+    /// The failure mode is worth naming because it is invisible: NODES are real child visuals and stay
+    /// draggable, so input looks like it works and only the background gesture is missing — which reads as
+    /// a broken pan feature rather than as discarded events.
+    /// </para>
+    /// </remarks>
+    static GraphView()
+    {
+        BackgroundProperty.OverrideDefaultValue<GraphView>(Brushes.Transparent);
+    }
+
     /// <summary>Creates the view.</summary>
     public GraphView()
     {
@@ -191,7 +215,9 @@ public class GraphView : Panel
         set => SetValue(IsNodeDragEnabledProperty, value);
     }
 
-    /// <summary>Whether dragging the background pans the view.</summary>
+    /// <summary>Whether dragging the background pans the view. Requires a non-null <c>Background</c> for
+    /// the press to be hit-tested at all — see the static constructor, which defaults it to transparent.
+    /// Setting <c>Background="{x:Null}"</c> therefore disables panning as a side effect.</summary>
     public bool IsPanEnabled
     {
         get => GetValue(IsPanEnabledProperty);
